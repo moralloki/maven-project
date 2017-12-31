@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn clean package'
  
               } // steps
-            }
+            
             post {
                 success {
                     echo 'Now Archiving...'
