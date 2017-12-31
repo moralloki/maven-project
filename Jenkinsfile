@@ -1,19 +1,20 @@
 pipeline {
   agent any
+  tools {
+    maven 'LocalApacheMaven3.5.2'
+  } // tools
   stages {
     stage ('Build') {
       steps {
-        sh '''
-           printenv
-         '''
+        // Run the maven build
+        sh 'mvn clean package'
       }
-    }
-
-    stage ('Post') {
-      steps {
-        echo "This is the post stage"
-      }
-    }
-  }
-}
-
+      post {
+        success {
+          echo 'Now Archiving...'
+          archiveArtifacts artifacts: '**/target/*.war'
+        } // success - post
+      } // post
+    } // stage ('Build')
+  } // stages
+} // pipeline
