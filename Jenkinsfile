@@ -16,5 +16,10 @@ pipeline {
         } // success - post
       } // post
     } // stage ('Build')
+    stage ('Deploy to Staging') {
+      steps {
+        build job: 'deploy-to-staging'
+      }
+    } // stage ('Deply to Staging')
   } // stages
 } // pipeline
